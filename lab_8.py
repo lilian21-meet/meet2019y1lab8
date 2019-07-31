@@ -20,9 +20,14 @@ food_pos = []
 food_stamps = []
 
 #Set up positions (x,y) of boxes that make up the snake
-snake = turtle.clone()
-snake.shape("square")
 
+snake = turtle.clone()
+snake.shape("circle")
+#snake.setup(400,250)
+#snake.bgpic("space.gif")
+
+snake.color("black")
+turtle.bgcolor("yellow")
 #Hide the turtle object (it's an arrow - we don't need to see it)
 turtle.hideturtle()
 #Function to draw a part of the snake on the screen
@@ -94,10 +99,10 @@ turtle.onkeypress(Left, "Left")
 ####WRITE YOUR CODE HERE!!
 
 turtle.listen()
-turtle.register_shape("trash.gif") 
+turtle.register_shape("burger.gif") 
 
 food = turtle.clone()
-food.shape("trash.gif") 
+food.shape("burger.gif") 
 
 #Locations of food
 food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
@@ -153,6 +158,7 @@ def move_snake():
     elif new_y_pos <= DOWN_EDGE:
          print("You hit the Down edge! Game over!")
          quit()
+   
 
 
     #If snake.direction is up, then we want the snake to change
@@ -182,14 +188,24 @@ def move_snake():
     ######## SPECIAL PLACE - Remember it for Part 5
     
     #If snake is on top of food item
+
+    
     if snake.pos() in food_pos:
         food_index=food_pos.index(snake.pos()) #What does this do?
         food.clearstamp(food_stamps[food_index]) #Remove eaten food stamp
         food_pos.pop(food_index) #Remove eaten food position
         food_stamps.pop(food_index) #Remove eaten food stamp
         print("You have eaten the food!")
+        new_stamp()
+        
+        
 
-      
+    for lee in pos_list[1:-1]:
+        if snake.pos() == lee:
+            print("game over")
+            
+            quit()
+                  
 
     #remove the last piece of the snake (Hint Functions are FUN!)
     new_stamp()
@@ -197,8 +213,9 @@ def move_snake():
     turtle.ontimer(move_snake,TIME_STEP) #<--Last line of function
 move_snake()
 
-    
+
     #If snake is on top of food item
+
 
 
     
